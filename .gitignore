@@ -1,7 +1,13 @@
 __pycache__
+.DS_Store
 
-# cromwell jar files
+# cromwell jar files, etc.
+cromwell-executions
+cromwell-workflow-logs
 *.jar
+pytest-wdl-tests/tests/literals/run.sh
+pytest-wdl-tests/tests/literals/validate.sh
+pytest-wdl-tests/tests/literals/json.sh
 
 # python virtual environment
 env/

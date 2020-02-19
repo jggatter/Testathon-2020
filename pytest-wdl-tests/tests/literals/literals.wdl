@@ -1,4 +1,6 @@
 # This workflow tests the the literals sections of the WDL 1.0 Spec
+# It also requires the use of some functions such as write_lines(), write_object(), write_map(), and stdout()
+# write_map() is slightly broken as it does not print a \n after writing like the related functions do.
 
 version 1.0
 
@@ -79,8 +81,9 @@ task array_literals {
 	}
 	command {
 		set -e
-		
+		echo INTS
 		cat ~{array_literal_ints}
+		printf "STRINGS\n"
 		cat ~{array_literal_strings}
 	}
 	output {
@@ -95,8 +98,10 @@ task map_literals {
 	}
 	command {
 		set -e
-
+		
+		echo INTS
 		cat ~{map_literal_ints}
+		printf "\nMIXED\n"
 		cat ~{map_literal_mixed}
 	}
 	output {
@@ -126,7 +131,9 @@ task object_map_coercion {
 	command {
 		set -e
 
+		echo OBJECT_SYNTAX
 		cat ~{object_syntax}
+		printf "MAP_COERCION\n"
 		cat ~{map_coercion}
 	}
 	output {
