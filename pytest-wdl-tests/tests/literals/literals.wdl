@@ -89,6 +89,9 @@ task array_literals {
 	output {
 		File array_literals_out = stdout()
 	}
+	runtime {
+		docker: "ubuntu:latest"
+	}
 }
 
 task map_literals {
@@ -101,11 +104,14 @@ task map_literals {
 		
 		echo INTS
 		cat ~{map_literal_ints}
-		printf "\nMIXED\n"
+		printf "\nMIXED\n" # Need a newline following the first written map
 		cat ~{map_literal_mixed}
 	}
 	output {
 		File map_literals_out = stdout()
+	}
+	runtime {
+		docker: "ubuntu:latest"
 	}
 }
 
@@ -120,6 +126,9 @@ task object_literals {
 	}
 	output {
 		File object_literals_out = stdout()
+	}
+	runtime {
+		docker: "ubuntu:latest"
 	}
 }
 
@@ -139,6 +148,9 @@ task object_map_coercion {
 	output {
 		File object_map_coercion_out = stdout()
 	}
+	runtime {
+		docker: "ubuntu:latest"
+	}
 }
 
 task pair_literals {
@@ -153,5 +165,8 @@ task pair_literals {
 	}
 	output {
 		File pair_literals_out = stdout()
+	}
+	runtime {
+		docker: "ubuntu:latest"
 	}
 }

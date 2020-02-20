@@ -3,31 +3,20 @@ import pytest_wdl
 
 # Takes about two minutes to run all tests.
 
-# All should pass
+# All these should pass
 def test_spaces(workflow_data, workflow_runner):
-	inputs = {}
 	expected = workflow_data.get_dict("spaces_out")
-	workflow_runner("spaces.wdl", inputs, expected)
+	workflow_runner("spaces.wdl", expected=expected)
 
 def test_tabs(workflow_data, workflow_runner):
-	inputs = {}
 	expected = workflow_data.get_dict("tabs_out")
-	workflow_runner("tabs.wdl", inputs, expected)
+	workflow_runner("tabs.wdl", expected=expected)
 
 def test_calls_to_differently_indented_subworkflows(workflow_data, workflow_runner):
-	inputs = {}
 	expected = workflow_data.get_dict("tabs_out", "spaces_out")
-	workflow_runner("proper_whitespace.wdl", inputs, expected)
+	workflow_runner("proper_whitespace.wdl", expected=expected)
 
 # All below should fail
-def test_mixed(workflow_data, workflow_runner):
-	inputs = {}
-	#expected = workflow_data.get_dict("mixed_out")
+def test_mixed_fails(workflow_data, workflow_runner):
 	with pytest.raises(pytest_wdl.ExecutionFailedError) as err:
-		workflow_runner("mixed.wdl", inputs)
-
-def test_indented_heredoc(workflow_data, workflow_runner):
-	inputs = {}
-	#expected = workflow_data.get_dict("mixed_out")
-	with pytest.raises(pytest_wdl.ExecutionFailedError) as err:
-		workflow_runner("indented_heredoc.wdl", inputs)
+		workflow_runner("mixed.wdl")

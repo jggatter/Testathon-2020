@@ -28,4 +28,7 @@ task t {
 	output {
 		File out = stdout()
 	}
+	runtime {
+		docker: "python:slim"
+	}
 }

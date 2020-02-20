@@ -1,9 +1,9 @@
-# This workflow has 2-space indents and one tab at the heredoc! It is intended to fail miserably.
+# This workflow has 2-space indents but also few sneaky tabs! It is intended to fail miserably.
 
 version 1.0
 
 workflow mixed {
-  input {
+	input {
     String message = "I am a document. I am mixed. Let me fail!"
   }
   call t {
@@ -19,7 +19,7 @@ task t {
     String message
   }
   command {
-    echo ~{message}
+  	echo ~{message}
     python <<CODE
     for i in range(0,1):
     	print("Look now I'm in this python heredoc! ~{message}")
@@ -27,5 +27,8 @@ task t {
   }
   output {
     File out = stdout()
+  }
+  runtime {
+    docker: "python:slim"
   }
 }
